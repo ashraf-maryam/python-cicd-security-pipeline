@@ -24,8 +24,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run unit tests
-        run: pytest
+      - name: Run token service unit tests
+        run: python -m pytest -v test_token_service.py
+
+      - name: Run crypto wallet API security lab tests
+        working-directory: labs/crypto-wallet-api-security
+        run: python -m unittest discover -s tests -v
 
       - name: Run Bandit SAST scan
         run: |
